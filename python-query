@@ -1,0 +1,15 @@
+import requests
+
+def get_instance_metadata():
+    metadata_url = "http://169.254.169.254/metadata/instance?api-version=2020-06-01"
+    headers = {
+        "Metadata": "true"
+    }
+    response = requests.get(metadata_url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception("Failed to retrieve instance metadata")
+
+metadata = get_instance_metadata()
+print(metadata)
